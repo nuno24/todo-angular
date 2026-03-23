@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { Task } from '../../../../../types/Task';
 
 @Component({
@@ -9,4 +9,11 @@ import { Task } from '../../../../../types/Task';
 })
 export class TaskItem {
   task = input.required<Task>()
+
+  toDeleteTask = output<Task>()
+
+  onDeleteTask (task: Task) {
+    this.toDeleteTask.emit(task)
+  }
+
 }

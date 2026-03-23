@@ -34,7 +34,9 @@ export class TaskList {
     this.tasks.update(tasks => [...tasks, newTask])
   }
 
-  deleteTask() {
-    
+  deleteTask(task: Task) {
+    const newTasks = this.tasks()
+    const filteredTasks = newTasks.filter(t => t != task)
+    this.tasks.set(filteredTasks)
   }
 }
