@@ -1,0 +1,9 @@
+<h2>Task List</h2>
+
+<app-task-input (title)="addTask($event)"/>
+
+@for(task of tasks(); track task.content){
+  <app-task-item [task]="task" />
+} @empty {
+  <p>There are no items.</p>
+}
