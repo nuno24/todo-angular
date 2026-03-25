@@ -12,14 +12,17 @@ import { TaskInput } from "../../components/task-input/task-input";
 })
 export class TaskList {
   tasks = signal<Task[]>([{
+      id: crypto.randomUUID(),
       content:'task 1',
       completed: false
     },
     {
+      id: crypto.randomUUID(),
       content: 'task 2',
       completed: false
     },
     {
+      id: crypto.randomUUID(),
       content: 'task 3',
       completed: false
     }
@@ -27,6 +30,7 @@ export class TaskList {
 
   addTask(newTitle: string) {
     const newTask = {
+      id: crypto.randomUUID(),
       content: newTitle,
       completed: false
     }
@@ -36,7 +40,19 @@ export class TaskList {
 
   deleteTask(task: Task) {
     const newTasks = this.tasks()
-    const filteredTasks = newTasks.filter(t => t != task)
+    const filteredTasks = newTasks.filter(t => t.id != task.id)
     this.tasks.set(filteredTasks)
+  }
+
+  updateTask(task: Task) {
+    this.tasks.update(tasks => 
+      tasks.map(t => {
+        if (t.id === task.id) {
+          return task;
+        } else {
+          return t;
+        }
+      })
+    )
   }
 }

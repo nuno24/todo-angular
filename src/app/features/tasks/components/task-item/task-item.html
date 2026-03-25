@@ -1,2 +1,12 @@
-<p>{{task().content}}</p>
-<button (click)="onDeleteTask(task())">DELETE</button>
+
+@if(!isUpdating()) {
+  <p>{{task().content}}</p>
+  <button (click)="onDeleteTask(task())">DELETE</button>
+  <button (click)="onToggleIsUpdating()">EDIT</button>
+} @else {
+  <input
+    [(ngModel)]="editValue"
+  />
+  <button (click)="onUpdateTask(editValue)">SAVE</button>
+  <button (click)="onToggleIsUpdating()">CANCEL</button>
+}
